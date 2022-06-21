@@ -7,7 +7,7 @@ services:
     volumes:
       - pg_0_data:/bitnami/postgresql
     environment:
-      - POSTGRESQL_POSTGRES_PASSWORD=$(POSTGRESQL_POSTGRES_PASSWORD)
+      - POSTGRESQL_POSTGRES_PASSWORD=adminpassword
       - POSTGRESQL_USERNAME=customuser
       - POSTGRESQL_PASSWORD=custompassword
       - POSTGRESQL_DATABASE=customdatabase
