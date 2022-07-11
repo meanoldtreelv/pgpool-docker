@@ -24,7 +24,10 @@ services:
          - node.hostname==sd01
       mode:global
       restart_policy:
-        condition: none
+        condition: on-failure
+        delay: 30s
+        max_attempts: 2
+        window: 60s
 
 networks:
   ACCESS:
