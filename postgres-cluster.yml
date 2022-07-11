@@ -1,0 +1,105 @@
+version: "3.0"
+services:
+
+  pg-0:
+    image: docker.io/bitnami/postgresql-repmgr:latest
+    volumes:
+      - sd01-pg_data:/bitnami/postgresql
+    environment:
+      - POSTGRESQL_POSTGRES_PASSWORD=adminpassword
+      - POSTGRESQL_USERNAME=customuser
+      - POSTGRESQL_PASSWORD=custompassword
+      - POSTGRESQL_DATABASE=customdatabase
+      - REPMGR_PASSWORD=repmgrpassword
+      - REPMGR_PRIMARY_HOST=pg-0
+      # list of all postgres nodes
+      - REPMGR_PARTNER_NODES=pg-0,pg-1,pg-2
+      - REPMGR_NODE_NAME=pg-0
+      - REPMGR_NODE_NETWORK_NAME=pg-0
+    networks:
+      - ACCESS
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints:
+         - node.hostname==sd01
+      restart_policy:
+        condition: on-failure
+        delay: 30s
+        max_attempts: 2
+        window: 60s
+
+  pg-1:
+    image: docker.io/bitnami/postgresql-repmgr:latest
+    volumes:
+      - sd02-pg_data:/bitnami/postgresql
+    environment:
+      - POSTGRESQL_POSTGRES_PASSWORD=adminpassword
+      - POSTGRESQL_USERNAME=customuser
+      - POSTGRESQL_PASSWORD=custompassword
+      - POSTGRESQL_DATABASE=customdatabase
+      - REPMGR_PASSWORD=repmgrpassword
+      - REPMGR_PRIMARY_HOST=pg-0
+      # list of all postgres nodes
+      - REPMGR_PARTNER_NODES=pg-0,pg-1,pg-2
+      - REPMGR_NODE_NAME=pg-1
+      - REPMGR_NODE_NETWORK_NAME=pg-1
+    networks:
+      - ACCESS
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints:
+         - node.hostname==sd02
+      restart_policy:
+        condition: on-failure
+        delay: 30s
+        max_attempts: 2
+        window: 60s
+
+  pg-2:
+    image: docker.io/bitnami/postgresql-repmgr:latest
+    volumes:
+      - reporting-pg_data:/bitnami/postgresql
+    environment:
+      - POSTGRESQL_POSTGRES_PASSWORD=adminpassword
+      - POSTGRESQL_USERNAME=customuser
+      - POSTGRESQL_PASSWORD=custompassword
+      - POSTGRESQL_DATABASE=customdatabase
+      - REPMGR_PASSWORD=repmgrpassword
+      - REPMGR_PRIMARY_HOST=pg-0
+      # list of all postgres nodes
+      - REPMGR_PARTNER_NODES=pg-0,pg-1,pg-2
+      - REPMGR_NODE_NAME=pg-2
+      - REPMGR_NODE_NETWORK_NAME=pg-2
+    networks:
+      - ACCESS
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints:
+         - node.hostname==fsreports
+      restart_policy:
+        condition: on-failure
+        delay: 30s
+        max_attempts: 2
+        window: 60s
+
+
+
+
+networks:
+  ACCESS:
+    external: true
+
+
+volumes:
+  sd01-pg_data:
+    driver: local
+  sd02-pg_data:
+    driver: local
+  reporting-pg_data:
+    driver: local
