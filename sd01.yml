@@ -19,10 +19,11 @@ services:
     networks:
       - ACCESS
     deploy:
+      mode: replicated
+      replicas: 1
       placement:
         constraints:
          - node.hostname==sd01
-      mode:global
       restart_policy:
         condition: on-failure
         delay: 30s
