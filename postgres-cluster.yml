@@ -86,7 +86,7 @@ services:
       replicas: 1
       placement:
         constraints:
-         - node.hostname==sd01
+         - node.hostname==fsreports
       restart_policy:
         condition: on-failure
         delay: 30s
