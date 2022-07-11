@@ -3,6 +3,7 @@ services:
 
   pg-0:
     image: docker.io/bitnami/postgresql-repmgr:latest
+    container_name: pg-0
     volumes:
       - sd01-pg_data:/bitnami/postgresql
     environment:
@@ -32,6 +33,7 @@ services:
 
   pg-1:
     image: docker.io/bitnami/postgresql-repmgr:latest
+    container_name: pg-1
     volumes:
       - sd02-pg_data:/bitnami/postgresql
     environment:
@@ -61,6 +63,7 @@ services:
 
   pg-2:
     image: docker.io/bitnami/postgresql-repmgr:latest
+    container_name: pg-2
     ports:
       - 15432:5432
     volumes:
@@ -92,6 +95,7 @@ services:
 
   pgpool:
     image: docker.io/bitnami/pgpool:4
+    container_name: pgpool
     ports:
       - 5432:5432
     environment:
