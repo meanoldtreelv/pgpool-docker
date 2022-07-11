@@ -19,10 +19,10 @@ services:
     networks:
       - ACCESS
     deploy:
-      mode:global
       placement:
         constraints:
-        - node.hostname==sd01
+         - node.hostname==sd01
+      mode:global
       restart_policy:
         condition: none
 
