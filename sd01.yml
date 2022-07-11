@@ -1,7 +1,7 @@
 version: "3.0"
 services:
-  sd01-pg:
-    image: docker.io/bitnami/postgresql-repmgr:14
+  sd01:
+    image: docker.io/bitnami/postgresql-repmgr:latest
     volumes:
       - sd01-pg_data:/bitnami/postgresql
     environment:
@@ -9,13 +9,12 @@ services:
       - POSTGRESQL_USERNAME=customuser
       - POSTGRESQL_PASSWORD=custompassword
       - POSTGRESQL_DATABASE=customdatabase
-      - POSTGRESQL_NUM_SYNCHRONOUS_REPLICAS=1
       - REPMGR_PASSWORD=repmgrpassword
-      - REPMGR_PRIMARY_HOST=sd01-pg
+      - REPMGR_PRIMARY_HOST=sd01
       # list of all postgres nodes
-      - REPMGR_PARTNER_NODES=sd01-pg,sd02-pg,sd-report-pg
-      - REPMGR_NODE_NAME=sd01-pg
-      - REPMGR_NODE_NETWORK_NAME=sd01-pg
+      - REPMGR_PARTNER_NODES=sd01,sd02,sd99
+      - REPMGR_NODE_NAME=sd01
+      - REPMGR_NODE_NETWORK_NAME=sd01
     networks:
       - ACCESS
     deploy:
