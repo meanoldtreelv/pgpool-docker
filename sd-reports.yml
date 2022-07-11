@@ -1,0 +1,29 @@
+version: '2.1'
+services:
+  sd-report-pg:
+    image: docker.io/bitnami/postgresql-repmgr:14
+    ports:
+      - 15432:5432
+    volumes:
+      - sd-report-pg_data:/bitnami/postgresql
+    environment:
+      - POSTGRESQL_POSTGRES_PASSWORD=adminpassword
+      - POSTGRESQL_USERNAME=customuser
+      - POSTGRESQL_PASSWORD=custompassword
+      - POSTGRESQL_DATABASE=customdatabase
+      - POSTGRESQL_NUM_SYNCHRONOUS_REPLICAS=1
+      - REPMGR_PASSWORD=repmgrpassword
+      - REPMGR_PRIMARY_HOST=sd01-pg
+      # list of all postgres nodes
+      - REPMGR_PARTNER_NODES=sd01-pg,sd02-pg,sd-report-pg
+      - REPMGR_NODE_NAME=sd-report-pg
+      - REPMGR_NODE_NETWORK_NAME=sd-report-pg
+    networks:
+      - ACCESS
+networks:
+  ACCESS:
+         
+volumes:
+  sd-report-pg_data:
+    driver: local
+
