@@ -111,7 +111,7 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
-        networks:
+    networks:
       - ACCESS
     deploy:
       mode: replicated
