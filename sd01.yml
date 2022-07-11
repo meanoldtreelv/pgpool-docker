@@ -18,6 +18,13 @@ services:
       - REPMGR_NODE_NETWORK_NAME=sd01-pg
     networks:
       - ACCESS
+    deploy:
+      mode:global
+      placement:
+        constraints:
+        - node.hostname==sd01
+      restart_policy:
+        condition: none
 
 networks:
   ACCESS:
