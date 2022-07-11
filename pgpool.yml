@@ -22,6 +22,7 @@ services:
       timeout: 5s
       retries: 5
     networks:
-      - ACCESS
+      ACCESS:
+        external: true
 networks:
   ACCESS:

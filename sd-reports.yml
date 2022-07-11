@@ -22,6 +22,7 @@ services:
       - ACCESS
 networks:
   ACCESS:
+    external: true
          
 volumes:
   sd-report-pg_data:

@@ -2,8 +2,6 @@ version: "3.0"
 services:
   sd01-pg:
     image: docker.io/bitnami/postgresql-repmgr:14
-    ports:
-      - 15432:5432
     volumes:
       - sd01-pg_data:/bitnami/postgresql
     environment:
@@ -23,7 +21,7 @@ services:
 
 networks:
   ACCESS:
-  
+    external: true
 volumes:
   sd01-pg_data:
     driver: local
