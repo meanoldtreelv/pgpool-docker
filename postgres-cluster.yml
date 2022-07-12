@@ -31,7 +31,7 @@ services:
         max_attempts: 2
         window: 60s
 
-  pg-1:
+  pg-2:
     image: docker.io/bitnami/postgresql-repmgr:latest
     container_name: pg-1
     volumes:
