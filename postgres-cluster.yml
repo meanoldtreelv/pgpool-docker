@@ -100,7 +100,7 @@ services:
       - 5432:5432
     environment:
       # update list with node names followed by :5432 #
-      - PGPOOL_BACKEND_NODES=0:pg-2:5432,1:pg-1:5432,pg-9:5432
+      - PGPOOL_BACKEND_NODES=0:pg-2:5432,1:pg-1:5432,2:pg-9:5432
       # end update #
       - PGPOOL_SR_CHECK_USER=customuser
       - PGPOOL_SR_CHECK_PASSWORD=custompassword
