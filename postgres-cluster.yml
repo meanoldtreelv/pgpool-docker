@@ -12,7 +12,7 @@ services:
       - POSTGRESQL_PASSWORD=custompassword
       - POSTGRESQL_DATABASE=customdatabase
       - REPMGR_PASSWORD=repmgrpassword
-      - REPMGR_PRIMARY_HOST=pg-0
+      - REPMGR_PRIMARY_HOST=pg-1
       # list of all postgres nodes
       - REPMGR_PARTNER_NODES=pg-1,pg-2,pg-9
       - REPMGR_NODE_NAME=pg-1
